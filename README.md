@@ -19,3 +19,20 @@ Open the project by opening the file ```[that-folder]/ExampleGame1/ExampleGame1.
 
 You should be opening it with Visual Studio.  If youo are not, you either should do more research or tell your school to stop hiding dreamspark from their students.
 
+
+###An explaination of what's here:
+In your solution explorer  (the window that's to the right of your editor window after you open the solution) are a few folders. 
+
+-The Assets folder contains material to be used by microsoft to make your app purrty.  Logo, label, etc.
+-The Content folder is where you will put your game resources; such as images, sound effects, etc.  Try to stick to this convention.  It's a nice one.
+-The code is put directly under the ```ExampleGame1``` project folder for your convenience.
+
+####Try it. Unlike you it doesn't bite.
+Open the ```GameMain.cs``` file.  This is where the game is for now.  This is a simple game, so all the stuff is contained in this file for now.  Run the game.  Try to figure out what everything is doing.  Try to change stuff around.
+
+####Protip:
+If your computer can handle it without smoking, run the game in a simulator.  This way you can actually see the output as you click and stuff on the screen.
+
+
+THAT"S ALL! MORE WILL BE ADDED LATER.  (oh so you saw that double quote huh? yeah I did that on purpose.s)
+
