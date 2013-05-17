@@ -13,7 +13,7 @@ namespace ExampleGame1
         /// </summary>
         static void Main()
         {
-            var factory = new MonoGame.Framework.GameFrameworkViewSource<Game1>();
+            var factory = new MonoGame.Framework.GameFrameworkViewSource<GameMain>();
             Windows.ApplicationModel.Core.CoreApplication.Run(factory);
         }
     }

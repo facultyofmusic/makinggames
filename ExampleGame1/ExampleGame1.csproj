@@ -127,15 +127,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SFX.cs" />
+    <Compile Include="EventChecker.cs" />
+    <Compile Include="CheckedInputListener.cs" />
+    <Compile Include="WSoundEffect.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="GameMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="Content\font1.spritefont" />
     <None Include="ExampleGame1_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -146,12 +149,11 @@
     <Content Include="Content\character.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\crash.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Content\se_background.wav" />
     <Content Include="Content\se_cat00.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\se_crash.wav" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
