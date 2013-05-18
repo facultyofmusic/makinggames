@@ -34,5 +34,5 @@ Open the ```GameMain.cs``` file.  This is where the game is for now.  This is a 
 If your computer can handle it without smoking, run the game in a simulator.  This way you can actually see the output as you click and stuff on the screen.
 
 
-THAT"S ALL! MORE WILL BE ADDED LATER.  (oh so you saw that double quote huh? yeah I did that on purpose.s)
+THAT"S ALL! MORE WILL BE ADDED LATER.  (oh so you saw that double quote huh? yeah I did that on purpose.)
 
