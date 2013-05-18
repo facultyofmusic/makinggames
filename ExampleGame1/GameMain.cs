@@ -36,6 +36,7 @@ namespace ExampleGame1
         WSoundEffect crash, cat, song;
         SpriteFont font1;
         Vector2 position = new Vector2(0, 0);
+        Texture2D testImage;
 
         /**
          * Default Constructor
@@ -71,6 +72,7 @@ namespace ExampleGame1
             try {
                 //images
                 character = this.Content.Load<Texture2D>("character");
+                testImage = this.Content.Load<Texture2D>("testImage");
 
                 //font
                 font1 = this.Content.Load<SpriteFont>("font1");
@@ -136,7 +138,13 @@ namespace ExampleGame1
          */
         private void logicalUpdate(GameTime gameTime)
         {
+            position.X++;
 
+            // we should add a buffer of about 10 for the counter before triggering off game start actions
+            if (counter == 10)
+            {
+                song.Play();
+            }
         }
 
         
@@ -148,11 +156,14 @@ namespace ExampleGame1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            //A little example is response to game pauses
+            if (!paused) GraphicsDevice.Clear(Color.CornflowerBlue);
+            else GraphicsDevice.Clear(Color.Gray);
+
             _spriteBatch.Begin();
             {
-                position.X++;
                 _spriteBatch.Draw(character, position, Color.Red);
+                _spriteBatch.Draw(testImage, new Vector2(0, 0), Color.White);
             }
             _spriteBatch.End();
             // TODO: Add your drawing code here
@@ -171,6 +182,7 @@ namespace ExampleGame1
         public void inputPressed(Vector2 position)
         {
             Debug.WriteLine("Pressed at: " + position.ToString());
+            crash.Play();
         }
 
         public void inputDragged(Vector2 position)
@@ -199,12 +211,14 @@ namespace ExampleGame1
         protected override void OnDeactivated(object sender, EventArgs args)
         {
             base.OnDeactivated(sender, args);
+            paused = true;
             Debug.WriteLine("PAUSE HERE!");
         }
 
         protected override void OnActivated(object sender, EventArgs args)
         {
             base.OnActivated(sender, args);
+            paused = false;
             Debug.WriteLine("RESUME NOW!");
         }
 

@@ -83,6 +83,9 @@
     <AppxPackagedFile Include="C:\Users\facul_000\Desktop\ExampleGame1\ExampleGame1\Content\character.png">
       <PackagePath>Content\character.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\facul_000\Desktop\ExampleGame1\ExampleGame1\Content\testImage.png">
+      <PackagePath>Content\testImage.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\facul_000\Desktop\ExampleGame1\ExampleGame1\Content\se_background.wav">
       <PackagePath>Content\se_background.wav</PackagePath>
     </AppxPackagedFile>
