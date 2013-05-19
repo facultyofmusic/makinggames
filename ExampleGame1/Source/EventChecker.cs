@@ -52,7 +52,7 @@ namespace ExampleGame1
 
             MouseState mouseState = Mouse.GetState();
 
-            if (mouseState.LeftButton == ButtonState.Pressed)
+            if (mouseState.LeftButton == ButtonState.Pressed && !mousePressed)
             {
                 mousePressed = true;
                 listener.inputFired(new Vector2(mouseState.X, mouseState.Y), PRESSED);

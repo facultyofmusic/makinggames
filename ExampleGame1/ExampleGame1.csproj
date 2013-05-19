@@ -127,18 +127,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventChecker.cs" />
-    <Compile Include="CheckedInputListener.cs" />
-    <Compile Include="WSoundEffect.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="GameMain.cs" />
+    <Compile Include="Source\Class1.cs" />
+    <Compile Include="Source\Camera.cs" />
+    <Compile Include="Source\EventChecker.cs" />
+    <Compile Include="Source\CheckedInputListener.cs" />
+    <Compile Include="Source\IFocusable.cs" />
+    <Compile Include="Source\ICamera2D.cs" />
+    <Compile Include="Source\Player.cs" />
+    <Compile Include="Source\UT.cs" />
+    <Compile Include="Source\WSoundEffect.cs" />
+    <Compile Include="Source\Program.cs" />
+    <Compile Include="Source\GameMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="Content\font1.spritefont" />
     <None Include="ExampleGame1_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -146,15 +151,22 @@
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Content\centerTest.png" />
     <Content Include="Content\character.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\cursor.png" />
     <Content Include="Content\se_background.wav" />
-    <Content Include="Content\se_cat00.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Content\se_cat00.wav" />
     <Content Include="Content\se_crash.wav" />
     <Content Include="Content\testImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Dictionary1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

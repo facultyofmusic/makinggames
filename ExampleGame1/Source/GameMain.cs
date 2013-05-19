@@ -29,22 +29,46 @@ namespace ExampleGame1
         int counter = 0;
         bool paused = false;
 
+
+        /**
+         * Game view variables
+         * 
+         * 
+         */
+        Camera2D camera;
+        Vector2 lastInputLocation = new Vector2(0, 0);
+        Vector2 origin;
+
+        /**
+         * Player related.
+         * 
+         */
+        Player player;
+
+
         /**
          * Testing variables
          */
         Texture2D character;
         WSoundEffect crash, cat, song;
-        SpriteFont font1;
-        Vector2 position = new Vector2(0, 0);
         Texture2D testImage;
+        Texture2D centerTest;
+        Texture2D cursor;
 
         /**
          * Default Constructor
          */
         public GameMain()
         {
-            _graphics = new GraphicsDeviceManager(this);
-            Content = new ContentManager(Content.ServiceProvider, "Content");
+            try{
+                _graphics = new GraphicsDeviceManager(this);
+                _graphics.PreferMultiSampling = true;
+                Content = new ContentManager(Content.ServiceProvider, "Content");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("EXCEPTION: " + ex.Message + "\n" + ex.StackTrace);
+            }
         }
 
         /// <summary>
@@ -56,6 +80,10 @@ namespace ExampleGame1
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            camera = new Camera2D();
+            player = new Player();
+            origin = new Vector2(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2,
+                GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2);
 
             base.Initialize();
         }
@@ -73,9 +101,8 @@ namespace ExampleGame1
                 //images
                 character = this.Content.Load<Texture2D>("character");
                 testImage = this.Content.Load<Texture2D>("testImage");
-
-                //font
-                font1 = this.Content.Load<SpriteFont>("font1");
+                centerTest = this.Content.Load<Texture2D>("centerTest");
+                cursor = this.Content.Load<Texture2D>("cursor");
 
                 //sounds
                 crash = new WSoundEffect(@"Content\se_crash.wav");
@@ -86,16 +113,6 @@ namespace ExampleGame1
             {
                 Debug.WriteLine("EXCEPTION: " + ex.Message + "\n" + ex.StackTrace);
             }
-            //images
-            character = this.Content.Load<Texture2D>("character");
-
-            //font
-            //font1 = this.Content.Load<SpriteFont>("font1");
-
-            //sounds
-            crash = new WSoundEffect(@"Content\se_crash.wav");
-            cat = new WSoundEffect(@"Content\se_cat00.wav");
-            song = new WSoundEffect(@"Content\se_background.wav");
 
             // TODO: use this.Content to load your game content here
         }
@@ -126,6 +143,8 @@ namespace ExampleGame1
                 counter++;          // increment game counter if not paused
                 logicalUpdate(gameTime);
             }
+
+
         }
 
 
@@ -138,13 +157,25 @@ namespace ExampleGame1
          */
         private void logicalUpdate(GameTime gameTime)
         {
-            position.X++;
+            lastInputLocation.X+= 0.01f;
 
             // we should add a buffer of about 10 for the counter before triggering off game start actions
             if (counter == 10)
             {
                 song.Play();
             }
+
+
+            /**
+             * Player update and logic
+             * 
+             */
+            player.update(gameTime);
+
+            /**
+             * Update camera stuff
+             */
+            camera.update(player.position);
         }
 
         
@@ -160,16 +191,36 @@ namespace ExampleGame1
             if (!paused) GraphicsDevice.Clear(Color.CornflowerBlue);
             else GraphicsDevice.Clear(Color.Gray);
 
+            //_spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, camera.Transform);
+            //_spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteSortMode.FrontToBack, SaveStateMode.SaveState, camera.Transform);
             _spriteBatch.Begin();
             {
-                _spriteBatch.Draw(character, position, Color.Red);
-                _spriteBatch.Draw(testImage, new Vector2(0, 0), Color.White);
+                //ORIGIN TEST.  ALWAYS DRAW AT WHERE THE ORIGIN IS ON SCREEN
+                _spriteBatch.Draw(centerTest, origin, null, Color.White, 0, new Vector2(centerTest.Width / 2, centerTest.Height / 2), new Vector2(1f, 1), SpriteEffects.None, 0);
+                //CURSOR FOR MOUSE INPUT REFERENCE
+                _spriteBatch.Draw(cursor, UT.pullMouseLocation(), null, Color.White, 0, new Vector2(0, 0), new Vector2(1, 1), SpriteEffects.None, 0);
+                Debug.WriteLine("HEIGHT: " + centerTest.Width / 2);
+
+                _spriteBatch.Draw(character, lastInputLocation, Color.Red);
+                _spriteBatch.Draw(character, getRenderCoordinate(camera.getPosition()), Color.Green);
+                _spriteBatch.Draw(testImage, getRenderCoordinate(new Vector2(500, 500)), null, Color.White, counter/100f, new Vector2(200, 200), new Vector2(1, 1), SpriteEffects.None, 0);
+                _spriteBatch.Draw(testImage, getRenderCoordinate(new Vector2(500, 500)), null, Color.White, 0, new Vector2(200, 200), new Vector2(1, 1), SpriteEffects.None, 0);
             }
             _spriteBatch.End();
             // TODO: Add your drawing code here
             base.Draw(gameTime);
         }
 
+
+        Vector2 getRenderCoordinate(Vector2 relativePosition)
+        {
+            return new Vector2(relativePosition.X - camera.getPosition().X, relativePosition.Y - camera.getPosition().Y);
+        }
+
+        Vector2 getRelativeToOrigin(Vector2 relativePosition)
+        {
+            return -(new Vector2(origin.X - relativePosition.X, origin.Y - relativePosition.Y));
+        }
 
 
         /**
@@ -182,18 +233,21 @@ namespace ExampleGame1
         public void inputPressed(Vector2 position)
         {
             Debug.WriteLine("Pressed at: " + position.ToString());
-            crash.Play();
+            //crash.Play();
         }
 
         public void inputDragged(Vector2 position)
         {
             Debug.WriteLine("Dragged to: " + position.ToString());
+            this.lastInputLocation = position;
+            player.moveTowards(getRelativeToOrigin(lastInputLocation));
+            Debug.WriteLine("Clicked " + getRelativeToOrigin(lastInputLocation) + " relative to origin");
         }
 
         public void inputReleased(Vector2 position)
         {
             Debug.WriteLine("Released at: " + position.ToString());
-            this.position = position;
+            this.lastInputLocation = position;
         }
 
         public void inputFired(Vector2 position, int state)
