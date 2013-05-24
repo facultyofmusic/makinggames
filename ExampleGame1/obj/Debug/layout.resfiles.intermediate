@@ -3,10 +3,10 @@ Assets\SmallLogo.png
 Assets\SplashScreen.png
 Assets\StoreLogo.png
 Dictionary1.xaml
-Content\centerTest.png
-Content\character.png
-Content\cursor.png
+Content\img_centerTest.png
+Content\img_character.png
+Content\img_cursor.png
+Content\img_testImage.png
 Content\se_background.wav
 Content\se_cat00.wav
 Content\se_crash.wav
-Content\testImage.png

@@ -127,8 +127,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Source\Class1.cs" />
     <Compile Include="Source\Camera.cs" />
+    <Compile Include="Source\ERM.cs" />
     <Compile Include="Source\EventChecker.cs" />
     <Compile Include="Source\CheckedInputListener.cs" />
     <Compile Include="Source\IFocusable.cs" />
@@ -151,15 +151,27 @@
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
-    <Content Include="Content\centerTest.png" />
-    <Content Include="Content\character.png">
+    <Content Include="Content\img_centerTest.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\cursor.png" />
-    <Content Include="Content\se_background.wav" />
-    <Content Include="Content\se_cat00.wav" />
-    <Content Include="Content\se_crash.wav" />
-    <Content Include="Content\testImage.png" />
+    <Content Include="Content\img_character.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\img_cursor.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\img_testImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\se_background.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\se_cat00.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\se_crash.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Dictionary1.xaml">

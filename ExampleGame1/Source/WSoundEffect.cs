@@ -13,6 +13,7 @@ namespace ExampleGame1
 
         public WSoundEffect(string soundFxPath)
         {
+
             _xaudio = new XAudio2();
             var masteringsound = new MasteringVoice(_xaudio);
 

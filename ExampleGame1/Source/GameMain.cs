@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using SharpDX.XAudio2;
 using System.Diagnostics;
 using Microsoft.Xna.Framework.Input.Touch;
+using ExampleGame1.Source;
 
 namespace ExampleGame1
 {
@@ -97,12 +98,17 @@ namespace ExampleGame1
             // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            // load resources usng content manager
+            ERM.init(Content);
+            ERM.load(new String[]{  "img_character", "img_testImage", "img_centerTest", "img_cursor", 
+                                    "se_crash", "se_cat00", "se_background"});
+
             try {
                 //images
-                character = this.Content.Load<Texture2D>("character");
-                testImage = this.Content.Load<Texture2D>("testImage");
-                centerTest = this.Content.Load<Texture2D>("centerTest");
-                cursor = this.Content.Load<Texture2D>("cursor");
+                character = ERM.getImage("img_character");
+                testImage = ERM.getImage("img_testImage");
+                centerTest = ERM.getImage("img_centerTest");
+                cursor = ERM.getImage("img_cursor");
 
                 //sounds
                 crash = new WSoundEffect(@"Content\se_crash.wav");
